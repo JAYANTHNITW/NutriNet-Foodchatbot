@@ -1,2 +1,3 @@
 # Website Image demo:
- ![Alt text](Nutrinet image.png)
+![Nutrinet Image](Nutrinet%20image.png)
+
