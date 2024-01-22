@@ -1,5 +1,4 @@
-[![Watch the video](https://img.youtube.com/vi/I4siO9MMueo/maxresdefault.jpg)](https://www.youtube.com/watch?v=I4siO9MMueo&ab_channel=JayanthAILab)
-
+[![Video Title](https://img.youtube.com/vi/I4siO9MMueo/maxresdefault.jpg)](https://www.youtube.com/watch?v=I4siO9MMueo&t=132s)
 
 
 - **Project Overview:**
