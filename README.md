@@ -1,4 +1,10 @@
-[![Introduction: NLP Chatbot using Dialogflow](https://img.youtube.com/vi/I4siO9MMueo/maxresdefault.jpg)](https://www.youtube.com/watch?v=I4siO9MMueo&t=132s)
+<div align="center">
+  <a href="https://www.youtube.com/watch?v=I4siO9MMueo">
+    <img src="https://img.youtube.com/vi/I4siO9MMueo/maxresdefault.jpg" alt="Introduction: NLP Chatbot using Dialogflow" style="width:100%;">
+  </a>
+</div>
+
+
 
 
 - **Project Overview:**
