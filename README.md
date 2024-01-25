@@ -1,6 +1,6 @@
 <div align="center">
   <a href="https://www.youtube.com/watch?v=I4siO9MMueo">
-    <img src="https://img.youtube.com/vi/I4siO9MMueo/maxresdefault.jpg" alt="Introduction: NLP Chatbot using Dialogflow" style="width:100%;">
+    <img src="Thumbnail.png" alt="Introduction: NLP Chatbot using Dialogflow" style="width:100%;">
   </a>
 </div>
 
