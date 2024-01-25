@@ -35,6 +35,7 @@ async def handle_request(request: Request):
 
 
     intent_handler_dict = {
+        'new.order': new_order,
         'order.add - context ongoing-order': add_to_order,
         'order.remove - context: ongoing-order': remove_from_order,
         'order.complete - context: ongoing-order': complete_order,
@@ -69,6 +70,25 @@ def add_to_order(paramters: dict, session_id: str):
     return JSONResponse(content={
         "fulfillmentText": fulfillment_text
     })
+
+def new_order(parameters:dict, session_id: str): #session_id: str
+    if session_id in inprogress_orders:
+        # Clear the existing order for the given session_id
+        del inprogress_orders[session_id]
+    else:
+        # If it's the first time, just print the new order message
+        return JSONResponse(content={
+            "fulfillmentText": "ok, starting a new order. You can say things like 'I want two pizzas and one mango lassi'. "
+                               "Make sure to specify a quantity for every food item! Also, we have only the following items on our menu: "
+                               "Pav Bhaji, Chole Bhature, Pizza, Mango Lassi, Masala Dosa, Biryani, Vada Pav, Rava Dosa, and Samosa."
+        })
+
+    return JSONResponse(content={
+        "fulfillmentText": "Ok, starting a new order. You can say things like 'I want two pizzas and one mango lassi'. "
+                           "Make sure to specify a quantity for every food item! Also, we have only the following items on our menu: "
+                           "Pav Bhaji, Chole Bhature, Pizza, Mango Lassi, Masala Dosa, Biryani, Vada Pav, Rava Dosa, and Samosa."
+    })
+
 
 def complete_order(parameters:dict,session_id: str):
     if session_id not in inprogress_orders:
@@ -115,37 +135,54 @@ def save_to_db(order:dict):
 # step1: locate the session id record:  
 # step 2: get teh value form dict : {"pizza":2,"mango_lassi": 1}
 # step 3: remove the food items. request: ["vada pav", "pizza"]
+ 
 def remove_from_order(parameters: dict, session_id: str):
+    """Removes items from an ongoing order based on provided parameters."""
+
     if session_id not in inprogress_orders:
         return JSONResponse(content={
-            "fulfillmentText": "I'm Having a trouble finding your order. Sorry! Can you place a new order"
+            "fulfillmentText": "I'm having trouble finding your order. Sorry! Can you place a new order?"
         })
-    
+  
     current_order = inprogress_orders[session_id]
     food_items = parameters["food-item"]
-
-    removed_items = []
+    quantity = parameters["number"]
     no_such_items = []
+    removed_items = []
+    print(inprogress_orders[session_id])
+
 
     for item in food_items:
+        quantity_to_remove = int(quantity[0])  # Reset for each item
+
         if item not in current_order:
             no_such_items.append(item)
         else:
-            removed_items.append(item)
-            del current_order[item]
+            print(inprogress_orders[session_id])
+            if quantity_to_remove >= int(inprogress_orders[session_id][item]):
+                removed_items.append(item)
+                del current_order[item]
+            else:
+                current_order[item] -= quantity_to_remove
+                removed_items.append(f"{quantity_to_remove} {item}")
 
-    if len(removed_items) >0:
-        fulfillment_text = f'Removed {",".join(removed_items)} from your order!'
-    
-    if len(current_order.keys()) ==0:
-        fulfillment_text += "your order is empty!"
+    fulfillment_text = ""
+
+    if len(removed_items) > 0:
+        fulfillment_text += f'Removed {", ".join(removed_items)} from your order!'
+    elif len(no_such_items) > 0:
+        fulfillment_text += f"I couldn't find {', '.join(no_such_items)} in your order."
+
+    if len(current_order) == 0:
+        fulfillment_text += "Your order is empty!"
     else:
         order_str = genaric_helper.get_str_from_food_dict(current_order)
-        fulfillment_text += f" Here is what is left in  your order: {order_str}. Do you need anything else?"
+        fulfillment_text += f"Remaining items in your order: {order_str}. Do you need anything else?"
 
     return JSONResponse(content={
         "fulfillmentText": fulfillment_text
     })
+
 
 
 def track_order(parameters:dict, session_id: str):
