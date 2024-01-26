@@ -84,6 +84,130 @@ def insert_order_tracking(order_id, status):
     # closing the cursor
     cursor.close()
 
+def insert_order_city(city, order_id):
+    try:
+        cursor = cnx.cursor()
+
+        # calling the stored procedure or executing a SQL statement
+        cursor.execute('UPDATE order_tracking SET city = %s WHERE order_id = %s', (city, order_id))
+
+        # committing the changes
+        cnx.commit()
+
+        # closing the cursor
+        cursor.close()
+
+        print("City inserted into order_tracking Successfully")
+
+        return 1
+    except mysql.connector.Error as err:
+        print(f"Error inserting city into order_tracking: {err}")
+
+        # Rollback changes if necessary
+        cnx.rollback()
+
+        return -1
+
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        # Rollback changes if necessary
+        cnx.rollback()
+
+        return -1
+    
+def insert_order_street(street, order_id):
+    try:
+        cursor = cnx.cursor()
+
+        # calling the stored procedure or executing a SQL statement
+        cursor.execute('UPDATE order_tracking SET street = %s WHERE order_id = %s', (street, order_id))
+
+        # committing the changes
+        cnx.commit()
+
+        # closing the cursor
+        cursor.close()
+
+        print("street inserted into order_tracking Successfully")
+
+        return 1
+    except mysql.connector.Error as err:
+        print(f"Error inserting city into order_tracking: {err}")
+
+        # Rollback changes if necessary
+        cnx.rollback()
+
+        return -1
+
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        # Rollback changes if necessary
+        cnx.rollback()
+
+        return -1
+
+def insert_order_flatno(flatno, order_id):
+    try:
+        cursor = cnx.cursor()
+
+        # calling the stored procedure or executing a SQL statement
+        cursor.execute('UPDATE order_tracking SET flatno = %s WHERE order_id = %s', (flatno, order_id))
+
+        # committing the changes
+        cnx.commit()
+
+        # closing the cursor
+        cursor.close()
+
+        print("flat number inserted into order_tracking Successfully")
+
+        return 1
+    except mysql.connector.Error as err:
+        print(f"Error inserting city into order_tracking: {err}")
+
+        # Rollback changes if necessary
+        cnx.rollback()
+
+        return -1
+
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        # Rollback changes if necessary
+        cnx.rollback()
+
+        return -1
+
+def insert_order_phono(phono, order_id):
+    try:
+        cursor = cnx.cursor()
+
+        # calling the stored procedure or executing a SQL statement
+        cursor.execute('UPDATE order_tracking SET phonenumber = %s WHERE order_id = %s', (str(phono), order_id))
+
+        # committing the changes
+        cnx.commit()
+
+        # closing the cursor
+        cursor.close()
+
+        print("phonenumber inserted into order_tracking Successfully")
+
+        return 1
+    except mysql.connector.Error as err:
+        print(f"Error inserting phonenumber into order_tracking: {err}")
+
+        # Rollback changes if necessary
+        cnx.rollback()
+
+        return -1
+
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        # Rollback changes if necessary
+        cnx.rollback()
+
+        return -1
+
 def get_order_status(order_id: int):
     # Replace the placeholders with your actual database credentials
     db_config = {
@@ -124,4 +248,4 @@ def get_order_status(order_id: int):
         if 'connection' in locals() and connection.is_connected():
             connection.close()
 
- 
+

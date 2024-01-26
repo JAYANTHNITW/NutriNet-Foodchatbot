@@ -39,7 +39,11 @@ async def handle_request(request: Request):
         'order.add - context ongoing-order': add_to_order,
         'order.remove - context: ongoing-order': remove_from_order,
         'order.complete - context: ongoing-order': complete_order,
-        'track.order - context: ongoing-tracking': track_order
+        'track.order - context: ongoing-tracking': track_order,
+        'Order.city -context: ongoing': order_city,
+        'order.street context: ongoing order': order_street,
+        'order.flatno - context: ongoing': order_flatno,
+        'order.number -context: ongoing': order_phono
         }
 
     return intent_handler_dict[intent](parameters, session_id)
@@ -105,9 +109,10 @@ def complete_order(parameters:dict,session_id: str):
             order_total = db_helper.get_total_order_price(order_id)
             fulfillment_text = f"Awesome. We have placed your order. " \
                             f"Here is your order id # {order_id}. " \
-                            f"Your order total is {order_total} which you can pay at the time of delivery!"
+                            f"Your order total is {order_total} which you can pay at the time of delivery!. " \
+                            f"In which city you live?"
 
-        del inprogress_orders[session_id]
+      #  del inprogress_orders[session_id]
 
     return JSONResponse(content={
         "fulfillmentText": fulfillment_text
@@ -183,6 +188,114 @@ def remove_from_order(parameters: dict, session_id: str):
         "fulfillmentText": fulfillment_text
     })
 
+
+# from fastapi.responses import JSONResponse
+
+def order_city(parameters: dict, session_id: str):
+    try:
+        city = parameters.get("geo-city")
+        if not city:
+            raise ValueError("City not found in parameters.")
+
+        order = inprogress_orders.get(session_id)
+        if not order:
+            raise ValueError(f"Session ID {session_id} not found in inprogress_orders dictionary.")
+
+        order_id = save_to_db(order) -1
+        db_helper.insert_order_city(city=city, order_id=order_id)
+
+        return JSONResponse(content={
+            "fulfillmentText": "Great! Now, could you please tell me the street name where you'd like the food to be delivered?"
+        })
+
+    except ValueError as ve:
+        return JSONResponse(content={
+            "fulfillmentText": f"Error: {ve}"
+        })
+    except Exception as e:
+        return JSONResponse(content={
+            "fulfillmentText": f"An error occurred: {e}"
+        })
+
+
+def order_street(parameters: dict, session_id: str):
+    try:
+        street = parameters["street"]["city"] 
+        if not street:
+            raise ValueError("street not found in parameters.")
+
+        order = inprogress_orders.get(session_id)
+        if not order:
+            raise ValueError(f"Session ID {session_id} not found in inprogress_orders dictionary.")
+
+        order_id = save_to_db(order)-2
+        db_helper.insert_order_street(street=street, order_id=order_id)
+
+        return JSONResponse(content={
+            "fulfillmentText": "what is your flat number?"
+        })
+
+    except ValueError as ve:
+        return JSONResponse(content={
+            "fulfillmentText": f"Error: {ve}"
+        })
+    except Exception as e:
+        return JSONResponse(content={
+            "fulfillmentText": f"An error occurred: {e}"
+        })
+
+def order_flatno(parameters: dict, session_id: str):
+    try:
+        flatno = parameters["flatno"][0] 
+        if not flatno:
+            raise ValueError("street not found in parameters.")
+
+        order = inprogress_orders.get(session_id)
+        if not order:
+            raise ValueError(f"Session ID {session_id} not found in inprogress_orders dictionary.")
+
+        order_id = save_to_db(order)-3
+        db_helper.insert_order_flatno(flatno=flatno, order_id=order_id)
+
+        return JSONResponse(content={
+            "fulfillmentText": "Please provide your Phone Number"
+        })
+
+    except ValueError as ve:
+        return JSONResponse(content={
+            "fulfillmentText": f"Error: {ve}"
+        })
+    except Exception as e:
+        return JSONResponse(content={
+            "fulfillmentText": f"An error occurred: {e}"
+        })
+
+
+def order_phono(parameters: dict, session_id: str):
+    try:
+        phonenumber = parameters["number"]
+        if not phonenumber:
+            raise ValueError("phononumber not found in parameters.")
+
+        order = inprogress_orders.get(session_id)
+        if not order:
+            raise ValueError(f"Session ID {session_id} not found in inprogress_orders dictionary.")
+
+        order_id = save_to_db(order)-4
+        db_helper.insert_order_phono(phono=phonenumber, order_id=order_id)
+
+        return JSONResponse(content={
+            "fulfillmentText": "Phone Number is saved in database"
+        })
+
+    except ValueError as ve:
+        return JSONResponse(content={
+            "fulfillmentText": f"Error: {ve}"
+        })
+    except Exception as e:
+        return JSONResponse(content={
+            "fulfillmentText": f"An error occurred: {e}"
+        })
 
 
 def track_order(parameters:dict, session_id: str):
