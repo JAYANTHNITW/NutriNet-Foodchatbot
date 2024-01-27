@@ -1,0 +1,5 @@
+mysql-connector-python
+fastapi[all]
+gunicorn==20.1.0
+flask
+# Add other dependencies

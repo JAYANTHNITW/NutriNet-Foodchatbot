@@ -3,7 +3,7 @@
 
 <head>
     <link rel="stylesheet" type="text/css" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 
 <body>
@@ -26,9 +26,10 @@
         <section id="menu" class="content-container">
             <h2>Our Menu</h2>
             <div class="grid-container">
-                <img src="menu1.jpg" alt="Menu item 1">
-                <img src="menu2.jpg" alt="Menu item 2">
-                <img src="menu3.jpg" alt="Menu item 3">
+                <img src="{{ url_for('static', filename='menu1.jpg') }}" alt="Menu item 1">
+                <img src="{{ url_for('static', filename='menu2.jpg') }}" alt="Menu item 2">
+                <img src="{{ url_for('static', filename='menu3.jpg') }}" alt="Menu item 3">
+
                 <!-- Add menu items here -->
             </div>
         </section>

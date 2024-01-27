@@ -1,0 +1,86 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+    text-align: center;
+}
+
+header {
+    background-color: #0c0a09;
+    text-align: center;
+    padding: 10px;
+    color: #fff;
+}
+
+nav a {
+    margin: 0 10px;
+    text-decoration: none;
+    color: #fff;
+    transition: color 0.3s ease-in-out;
+}
+
+nav a:hover {
+    color: #a1444422;
+}
+
+section {
+    margin: 20px;
+    background-color: #f4f5f2;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0px 0px 10px 0px rgba(17, 16, 16, 0.1);
+}
+
+section h2 {
+    color: #121010;
+}
+
+footer {
+    background-color: #ff5733;
+    text-align: center;
+    padding: 0px;
+    color: #fff;
+    position: auto;
+    bottom: 0;
+    width: 100%;
+}
+
+.chat-bot {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    border: none;
+    z-index: 1000; 
+}
+
+.container {
+    margin: 3px;
+    max-width: 1400px;
+    padding: 0px 0;
+}
+
+section img {
+    display: block;
+    margin: auto;
+    width: 100%;
+    height: auto;
+}
+
+.banner {
+    background-color: #a65441;
+    color: white;
+    text-align: center;
+    padding: 2px;
+    margin: 0;
+}
+
+.welcome-heading {
+    font-size: 35px;
+    color: #e8810c;
+}
+
+.content-container {
+    margin: 10px;
+    padding: 0px 0;
+}

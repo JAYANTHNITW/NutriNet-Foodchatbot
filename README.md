@@ -50,3 +50,11 @@
 # Website Image demo:
 ![Nutrinet Image](Nutrinet%20image.png)
 
+
+# Workflows:
+
+## GitHub Secrets:
+```GCP_PROJECT_ID```
+```GCP_SA_KEY```
+
+
