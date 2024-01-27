@@ -16,11 +16,12 @@ jobs:
     - name: Set up Google Cloud SDK
       uses: google-github-actions/setup-gcloud@master
       with:
-        project_id: ${{secrets.GCP_PROJECT_ID}}
-        service_account_key: ${{secrets.GCP_SA_KEY}}
+        project_id: ${{ secrets.GCP_PROJECT_ID }}
+        service_account_key: ${{ secrets.GCP_SA_KEY }}
         export_default_credentials: true
 
     - name: Deploy Flask App
       run: |
         cd flask_app
-        gcloud app deploy app2.yaml --version=flask --quiet
+        gcloud app deploy app2.yaml --quiet
+

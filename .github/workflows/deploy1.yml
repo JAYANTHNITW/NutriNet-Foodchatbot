@@ -23,4 +23,4 @@ jobs:
     - name: Deploy FastAPI App
       run: |
         cd fastapi_app
-        gcloud app deploy app1.yaml --version=fastapi --quiet
+        gcloud app deploy app1.yaml --quiet
