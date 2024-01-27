@@ -54,7 +54,10 @@
 # Workflows:
 
 ## GitHub Secrets:
-```GCP_PROJECT_ID```
-```GCP_SA_KEY```
+```bash
+GCP_PROJECT_ID```
+
+```bash
+GCP_SA_KEY```
 
 
