@@ -1,10 +1,8 @@
-from flask import Flask, render_template
+ 
+from fastapi_app import app as fastapi_app
 
-app = Flask(__name__)
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run("fastapi_app:app", host="0.0.0.0", port=8080, reload=True)
 
-@app.route('/')
-def home():
-    return render_template('frontend/home.html')
 
-if __name__ == '__main__':
-    app.run(debug=True)
