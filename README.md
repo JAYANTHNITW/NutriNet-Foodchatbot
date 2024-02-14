@@ -3,7 +3,7 @@
 
 <div align="center">
   <a href="https://youtube.com/playlist?list=PLwqGWxcfGHcDywQmSq3sHDCIf03fBH4nM&si=eXBs1a5GSRhDU18Z">
-    <img src="Thumbnail.png" alt="Introduction: NLP Chatbot using Dialogflow" style="width:100%;">
+    <img src="part 00 chatbot.png" alt="Introduction: NLP Chatbot using Dialogflow" style="width:100%;">
   </a>
 </div>
 
