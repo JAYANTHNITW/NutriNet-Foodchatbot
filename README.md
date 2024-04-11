@@ -64,3 +64,5 @@ GCP_SA_KEY:
 ```
 
 image: 9158d116d106f6a2ac996c3b45fd5bf0385728c9965cc5212877392bbb2b14e3
+
+save the uri: 851725553607.dkr.ecr.eu-north-1.amazonaws.com/chatbot

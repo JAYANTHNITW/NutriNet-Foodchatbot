@@ -33,7 +33,7 @@ async def handle_request(request: Request):
 
     session_id = genaric_helper.extract_session_id(outputContexts[0]['name'])
 
-
+ 
     intent_handler_dict = {
         'new.order': new_order,
         'order.add - context ongoing-order': add_to_order,
@@ -155,7 +155,7 @@ def remove_from_order(parameters: dict, session_id: str):
     quantity = parameters["number"]
     no_such_items = []
     removed_items = []
-    print(inprogress_orders[session_id])
+    #print(inprogress_orders[session_id])
 
 
     for item in food_items:
